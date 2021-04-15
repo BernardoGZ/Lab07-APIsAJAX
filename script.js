@@ -10,21 +10,26 @@ var buttonDiv = $("#animal-buttons");
 var gifDiv = $("#animals");
 
 var apikey = "RaV0ANEBBbIH1BcAfm7V9ALhx2G9Y264";
-var temas = ["futbol", "basquetbol", "tennis", "golf", "volleybol", "natacion" ];
+var temas = ["futbol", "basquetbol", "tennis", "golf", "volley", "natacion" ];
+
+var palabra;
 
 for (let i = 0; i < temas.length; i++) {
     const element = temas[i];
     buttonDiv.append(`<button class='buttons' data-type='${element}'>${element}</button>`);
 }
 
-$(".buttons").on("click", function(e){
+buttonDiv.on("click", ".buttons", function(e){
     e.preventDefault();
-    getGifs();
+    gifDiv.html(null);
+    palabra = this.getAttribute('data-type');
+    getGifs(palabra);
+
 })
 
-function getGifs(){
+function getGifs(p){
     $.ajax({
-        url: `https://api.giphy.com/v1/gifs/search?q=${temas[0]}&api_key=${apikey}&limit=10`, 
+        url: `https://api.giphy.com/v1/gifs/search?q=${p}&api_key=${apikey}&limit=10`, 
         success: function(respuesta){ 
 
             for (let i = 0; i < respuesta.data.length; i++) {
@@ -56,5 +61,10 @@ gifDiv.on("click", ".gifs", function(e){
 
 })
 
-    //apikey> RaV0ANEBBbIH1BcAfm7V9ALhx2G9Y264
+$("#add-animal").on("click", function(e){
+    e.preventDefault();
+    var addtext = $("#animal-input").val();
+    buttonDiv.append(`<button class='buttons' data-type='${addtext}'>${addtext}</button>`);
+})
+
 });
