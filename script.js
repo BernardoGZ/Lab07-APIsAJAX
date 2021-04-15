@@ -35,7 +35,7 @@ function getGifs(p){
             for (let i = 0; i < respuesta.data.length; i++) {
                 const gif = respuesta.data[i];
                 var still = 1;
-                gifDiv.append(`<img class="gifs" src="${gif.images.fixed_height_still.url}" alt="No image"  data-imgsm='${gif.images.fixed_height_still.url}' data-imgcm='${gif.images.fixed_height.url}' data-var='${still}'>`);
+                gifDiv.append(`<div><img class="gifs" src="${gif.images.fixed_height_still.url}" alt="No image"  data-imgsm='${gif.images.fixed_height_still.url}' data-imgcm='${gif.images.fixed_height.url}' data-var='${still}'><p>Rating: ${gif.rating}</p></div>`);
                 
             }
             
